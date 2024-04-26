@@ -37,46 +37,64 @@ void viewTask(const vector<TaskSchema>& listOfTask){
             cout << "No Task To Display" << endl;
             cout << "Type (Exit) To Go Back: " << flush;
             cin >> text;
-            if(text=="Exit"){
+            if(text=="Exit" & text != "Exit"){
                 break;
             }
         }
-        cout << "Task: " << endl;
+        cout << "\nTask List: " << endl;
         for (size_t i = 0; i <= listOfTask.size(); ++i){
             cout << i+1 << ". ";
             cout << listOfTask[i].Description << flush;
             if (listOfTask[i].Completed)
             {
                 cout << " [Y]" << endl;
-                cout << "Type (Exit) To Go Back: " << flush;
-                cin >> text;
-                if(text=="Exit"){
-                    break;
-                }
             } else {
                 cout << " [X]" << endl;
-                cout << "Type (Exit) To Go Back: " << flush;
-                cin >> text;
-                if(text=="Exit"){
-                    break;
-                }
             }
+        }
+        cout << "Type (Exit) To Go Back: " << flush;
+        cin >> text;
+        if(text=="Exit" & text != "Exit"){
+            break;
         }
     }
 }
 
 void markTaskComplete(vector<TaskSchema>& listOfTask){
-    int taskIndex;
-    cout << "Enter The Index of Description Want to Mark Complete: " << flush;
-    cin >> taskIndex;
-    --taskIndex;
-    if (taskIndex >= 0 && taskIndex < listOfTask.size()){
-        listOfTask[taskIndex].Completed = true;
-        cout << "Task Marked as Completed" << endl;
+    while (true)
+    {
+        int taskIndex;
+        cout << "Enter The Index of Description Want to Mark Complete (Type '0' to stop): " << flush;
+        cin >> taskIndex;
+        if(taskIndex == 0) break;
+        --taskIndex;
+        if (taskIndex >= 0 && taskIndex < listOfTask.size()){
+            listOfTask[taskIndex].Completed = true;
+            cout << "Task Marked as Completed" << endl;
 
-        viewTask(listOfTask);
-    }else{
-        cout << "Invalid Task Number" << endl;
+            viewTask(listOfTask);
+        }else{
+            cout << "Invalid Task Number" << endl;
+        }   
+    }
+}
+
+void markTaskIncomplete(vector<TaskSchema>& listOfTask){
+    while (true)
+    {
+        int taskIndex;
+        cout << "Enter The Index of Description Want to Mark as Incomplete (Type '0' to stop): " << flush;
+        cin >> taskIndex;
+        if(taskIndex == 0) break;
+        --taskIndex;
+        if (taskIndex >= 0 && taskIndex < listOfTask.size()){
+            listOfTask[taskIndex].Completed = false;
+            cout << "Task Marked as Incomplete." << endl;
+
+            viewTask(listOfTask);
+        }else{
+            cout << "Invalid Task Number" << endl;
+        }   
     }
 }
 
@@ -89,8 +107,9 @@ int main(){
         cout << "1. Add Task" << endl;
         cout << "2. View Task" << endl;
         cout << "3. Mark Task as Complete" << endl;
-        cout << "4. Delete Task" << endl;
-        cout << "5. Exit" << endl;
+        cout << "4. Mark Task as Incomplete" << endl;
+        cout << "5. Delete Task" << endl;
+        cout << "6. Exit" << endl;
         cout << "Enter your Number Choice: " << flush;
         cin >> choice;
         cin.ignore();
@@ -106,13 +125,16 @@ int main(){
         case 3:
             markTaskComplete(taskList);
             break;
-        case 5:
+        case 4:
+            markTaskIncomplete(taskList);
+            break;
+        case 6:
             cout << "Exiting Task Manager........." << endl;
             break;
         default:
             cout << "Invalid Input. Please Try Again" << endl;
             break;
         }
-    }while(choice >0 && choice <= 5);
+    }while(choice >0 && choice <= 6);
     return 0;
 }
