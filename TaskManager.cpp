@@ -13,7 +13,7 @@ struct TaskSchema
 void addTask(vector<TaskSchema>& listOfTask){
     while (true){
         TaskSchema storeTask;
-        cout << "Enter The Task Description (type 'Exit' to stop): " << flush;
+        cout << "\nEnter The Task Description (type 'Exit' to stop): " << flush;
         getline(cin, storeTask.Description);
         if (storeTask.Description == "Exit"){
             break;
@@ -22,7 +22,7 @@ void addTask(vector<TaskSchema>& listOfTask){
         size_t initialSize = listOfTask.size();
         listOfTask.push_back(storeTask);
         if(listOfTask.size() > initialSize){
-            cout << "\nTask Added Successfully!!!!!" << endl;
+            cout << "\nTask Added Successfully!!!!!\n" << endl;
         } else {
             cout << "\nFailed To Add Task" << endl;
         }
@@ -42,7 +42,7 @@ void viewTask(const vector<TaskSchema>& listOfTask){
             }
         }
         cout << "\nTask List: " << endl;
-        for (size_t i = 0; i <= listOfTask.size(); ++i){
+        for (size_t i = 0; i < listOfTask.size(); ++i){
             cout << i+1 << ". ";
             cout << listOfTask[i].Description << flush;
             if (listOfTask[i].Completed)
@@ -54,7 +54,7 @@ void viewTask(const vector<TaskSchema>& listOfTask){
         }
         cout << "Type (Exit) To Go Back: " << flush;
         cin >> text;
-        if(text=="Exit" & text != "Exit"){
+        if(text=="Exit"){
             break;
         }
     }
