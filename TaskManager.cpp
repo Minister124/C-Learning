@@ -4,6 +4,12 @@
 
 using namespace std;
 
+enum Catagories{
+    Work,
+    Personal,
+    Shopping,
+};
+
 struct TaskSchema{
     string description;
     bool completed;
@@ -81,8 +87,7 @@ void markTaskComplete(vector<TaskSchema>& listOfTask){
         if (taskIndex == 0) 
         {
             break;
-        }
-        
+        } 
     }
 }
 
@@ -135,6 +140,19 @@ void deleteTask(vector<TaskSchema>& listOfTask){
         {
             break;
         }
+    }
+}
+
+void breakOut(){
+    while (true)
+    {
+        string text;
+        cout << "\nType 'Enter' To Exit: ";
+        cin >> text;
+        if (text == "Exit"){
+            break;
+        }
+        
     }
 }
 
