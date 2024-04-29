@@ -13,6 +13,7 @@ enum Catagories{
 struct TaskSchema{
     string description;
     bool completed;
+    Catagories catagory;
 };
 
 void addTask(vector<TaskSchema>& listOfTask){
@@ -22,6 +23,14 @@ void addTask(vector<TaskSchema>& listOfTask){
         cout << "\nEnter The Task Description (Type 'Exit'to Stop): " << flush;
         getline(cin, storeTask.description);
         if (storeTask.description == "Exit") break;
+        cout << "Select Task Catagory: " << endl;
+        cout << "1. Work " << endl;
+        cout << "2. Personal " << endl;
+        cout << "3. Shopping " << endl;
+        int choice;
+        cin >> choice;
+        cin.ignore();
+        if (choice>3 && choice<0) break;
         storeTask.completed = false;
         size_t initialSize = listOfTask.size();
         listOfTask.push_back(storeTask);
