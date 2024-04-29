@@ -22,8 +22,8 @@ void addTask(vector<TaskSchema>& listOfTask){
         TaskSchema storeTask;
         cout << "\nEnter The Task Description (Type 'Exit'to Stop): " << flush;
         getline(cin, storeTask.description);
-        if (storeTask.description == "Exit") break;
-        cout << "Select Task Catagory: " << endl;
+        if(storeTask.description == "Exit") break;
+        cout << "Select Task Catagory: " << flush;
         cout << "1. Work " << endl;
         cout << "2. Personal " << endl;
         cout << "3. Shopping " << endl;
@@ -31,6 +31,22 @@ void addTask(vector<TaskSchema>& listOfTask){
         cin >> choice;
         cin.ignore();
         if (choice>3 && choice<0) break;
+        switch (choice)
+        {
+        case 1:
+            storeTask.catagory = Catagories::Work;
+            break;
+        case 2:
+            storeTask.catagory = Catagories::Personal;
+            break;
+        case 3:
+            storeTask.catagory = Catagories::Shopping;
+            break;
+        default:
+            cout << "Invalid choice. Selecting Personal By default." << endl;
+            storeTask.catagory = Catagories::Personal;
+            break;
+        }
         storeTask.completed = false;
         size_t initialSize = listOfTask.size();
         listOfTask.push_back(storeTask);
