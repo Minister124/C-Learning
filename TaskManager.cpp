@@ -59,7 +59,7 @@ void addTask(vector<TaskSchema>& listOfTask){
     };
 }
 
-void viewTask(const vector<TaskSchema>& listOfTask){
+void viewTask(const vector<TaskSchema>& listOfTask, Catagories catagory){
     while (true)
     {
         string text;
@@ -69,23 +69,44 @@ void viewTask(const vector<TaskSchema>& listOfTask){
             cin >> text;
             if(text == "Exit") break;
         }else{
+            cout << "\nTasks in Catagories: ";
+            switch (catagory){
+                case Catagories::Work:
+                    cout << "Work" << endl;
+                    break;
+                case Catagories::Personal:
+                    cout << "Personal" << endl;
+                    break;
+                case Catagories::Shopping:
+                    cout << "Shopping" << endl;
+                    break;
+                default:
+                    break;
+            }
+            bool success = false;
             cout << "\nTask List: " << endl;
-            for(size_t i = 0; i<listOfTask.size(); ++i){
-                cout << i+1 << ". ";
-                cout << listOfTask[i].description << flush;
-                if (listOfTask[i].completed){
-                    cout << "[Y]" << endl;
-                }else{
-                    cout << "[X]" << endl;
+            for(const TaskSchema& task:listOfTask){
+                if (task.catagory == catagory){
+                    success = true;
+                    cout << "Description: " << task.description << flush;
+                    if (task.completed){ 
+                        cout << "[Y]" << endl;
+                    } else {
+                        cout << "[X]" << endl;
+                    }
+                    cout << endl;
                 }
             }
-            cout << "\n Type 'Exit' to Stop the Operation: " << flush;
-            cin >> text;
-            if (text == "Exit")
+            if (!success)
             {
-                break;
-            }
-            
+                cout << "No Task To In This Catagory!!!" << endl;
+            }  
+        }
+        cout << "\n Type 'Exit' to Stop the Operation: " << flush;
+        cin >> text;
+        if (text == "Exit")
+        {
+            break;
         }
     }
 }
@@ -168,58 +189,64 @@ void deleteTask(vector<TaskSchema>& listOfTask){
     }
 }
 
-void breakOut(){
-    while (true)
-    {
-        string text;
-        cout << "\nType 'Enter' To Exit: ";
-        cin >> text;
-        if (text == "Exit"){
-            break;
-        }
-        
-    }
-}
 
 int main(){
     vector<TaskSchema> taskList;
     int choice;
-    do{
+    do
+    {
         cout << "Task Manager Menu: " << endl;
-        cout << "1. Add Task" << endl;
-        cout << "2. View Task" << endl;
-        cout << "3. Mark Task as Complete" << endl;
-        cout << "4. Mark Task as Incomplete" << endl;
+        cout << "\n1. Add Task" << endl;
+        cout << "2. View Task By Catagories" << endl;
+        cout << "3. Mark Task Complete" << endl;
+        cout << "4. Mark Task Incomplete" << endl;
         cout << "5. Delete Task" << endl;
-        cout << "6. Exit" << endl;
-        cout << "Enter your Number Choice: " << flush;
+        cout << "0. Exit" << endl;
+        cout << "\nEnter Your Choice: " << flush;
         cin >> choice;
         cin.ignore();
-
         switch (choice)
         {
-        case 1:
-            addTask(taskList);
-            break;
-        case 2:
-            viewTask(taskList);
-            break;
-        case 3:
-            markTaskComplete(taskList);
-            break;
-        case 4:
-            markTaskIncomplete(taskList);
-            break;
-        case 5:
-            deleteTask(taskList);
-            break;
-        case 6:
-            cout << "Exiting Task Manager!!!!!!!" << endl;
-            break;
-        default:
-            cout << "Invalid Output!!, Please Try Again" << endl;
-            break;
+            case 0:
+                cout << "Exit Task Manager Console" << endl;
+                break;
+            case 1:
+                addTask(taskList);
+                break;
+            case 2:
+                cout << "\nCatagories" << endl;
+                cout << "1. Work " << endl;
+                cout << "2. Personal " << endl;
+                cout << "3. Shopping " << endl;
+                int catagoryChoice;
+                cin >> catagoryChoice;
+                cin.ignore();
+                switch (catagoryChoice)
+                {
+                case 1:
+                    viewTask(taskList, Catagories::Work);
+                    break;
+                case 2:
+                    viewTask(taskList, Catagories::Personal);
+                    break;
+                case 3:
+                    viewTask(taskList, Catagories::Shopping);
+                    break;
+                default:
+                    cout << "Invalid Choice!!!" << endl;
+                    break;
+                }
+                break;
+            case 3:
+                markTaskComplete(taskList);
+                break;
+            case 4:
+                markTaskIncomplete(taskList);
+                break;
+            case 5:
+                deleteTask(taskList);
+                break;
         }
-    }while (choice > 0 && choice != 6);
+    } while (choice>=0&&choice<=5);
     return 0;
 }
