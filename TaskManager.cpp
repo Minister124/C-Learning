@@ -23,10 +23,11 @@ void addTask(vector<TaskSchema>& listOfTask){
         cout << "\nEnter The Task Description (Type 'Exit'to Stop): " << flush;
         getline(cin, storeTask.description);
         if(storeTask.description == "Exit") break;
-        cout << "Select Task Catagory: " << flush;
-        cout << "1. Work " << endl;
+        cout << "Select Task Catagory: " << endl;;
+        cout << "\n1. Work " << endl;
         cout << "2. Personal " << endl;
         cout << "3. Shopping " << endl;
+        cout << "\nEnter Your Choice: " << flush;
         int choice;
         cin >> choice;
         cin.ignore();
