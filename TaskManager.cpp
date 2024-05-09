@@ -23,7 +23,7 @@ void addTask(vector<TaskSchema>& listOfTask){
         cout << "\nEnter The Task Description (Type 'Exit'to Stop): " << flush;
         getline(cin, storeTask.description);
         if(storeTask.description == "Exit") break;
-        cout << "Select Task Catagory: " << endl;;
+        cout << "\nSelect Task Catagory: " << endl;;
         cout << "\n1. Work " << endl;
         cout << "2. Personal " << endl;
         cout << "3. Shopping " << endl;
@@ -53,9 +53,9 @@ void addTask(vector<TaskSchema>& listOfTask){
         listOfTask.push_back(storeTask);
         if (listOfTask.size() > initialSize)
         {
-            cout << "\n Task Added Successfully!!!!" << endl;
+            cout << "\nTask Added Successfully!!!!" << endl;
         }else{
-            cout << "\n Failed To Add Task!!" << endl;
+            cout << "\nFailed To Add Task!!" << endl;
         }
     };
 }
@@ -89,11 +89,11 @@ void viewTask(const vector<TaskSchema>& listOfTask, Catagories catagory){
             for(const TaskSchema& task:listOfTask){
                 if (task.catagory == catagory){
                     success = true;
-                    cout << "Description: " << task.description << flush;
+                    cout << "\nDescription: " << task.description << flush;
                     if (task.completed){ 
-                        cout << "[Y]" << endl;
+                        cout << " [Y]" << endl;
                     } else {
-                        cout << "[X]" << endl;
+                        cout << " [X]" << endl;
                     }
                     cout << endl;
                 }
@@ -103,7 +103,7 @@ void viewTask(const vector<TaskSchema>& listOfTask, Catagories catagory){
                 cout << "No Task To In This Catagory!!!" << endl;
             }  
         }
-        cout << "\n Type 'Exit' to Stop the Operation: " << flush;
+        cout << "\nType 'Exit' to Stop the Operation: " << flush;
         cin >> text;
         if (text == "Exit")
         {
@@ -116,6 +116,7 @@ void markTaskComplete(vector<TaskSchema>& listOfTask){
     while (true)
     {
         int taskIndex;
+
         cout << "\nEnter The Number of Task Description you want to Mark as Complete (Type '0' to Exit): " << flush;
         cin >> taskIndex;
         if(taskIndex == 0){
@@ -124,12 +125,12 @@ void markTaskComplete(vector<TaskSchema>& listOfTask){
         --taskIndex;
         if(taskIndex>=0 && taskIndex<listOfTask.size()){
             listOfTask[taskIndex].completed = true;
-            cout << "\n Task Marked as Completed!!!" << endl;
+            cout << "\nTask Marked as Completed!!!" << endl;
         }else{
-            cout << "\n Invalid Task Number!!!!" << endl;
+            cout << "\nInvalid Task Number!!!!" << endl;
             break;
         }
-        cout << "Type 0 to Exit: " << flush;
+        cout << "\nType 0 to Exit: " << flush;
         cin >> taskIndex;
         if (taskIndex == 0) 
         {
@@ -196,7 +197,7 @@ int main(){
     int choice;
     do
     {
-        cout << "Task Manager Menu: " << endl;
+        cout << "\nTask Manager Menu: " << endl;
         cout << "\n1. Add Task" << endl;
         cout << "2. View Task By Catagories" << endl;
         cout << "3. Mark Task Complete" << endl;
@@ -219,6 +220,7 @@ int main(){
                 cout << "1. Work " << endl;
                 cout << "2. Personal " << endl;
                 cout << "3. Shopping " << endl;
+                cout << "\nEnter Your Choice: " << flush;
                 int catagoryChoice;
                 cin >> catagoryChoice;
                 cin.ignore();
